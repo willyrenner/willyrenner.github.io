@@ -206,16 +206,15 @@ svg {
     font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+
 .end {
 	width: 100%;
 	height: 500px;
 	background-color: #212529;
-    background-image: url(map-image.png);
-    background-repeat: no-repeat;
-    background-position: center;
-	bottom: 0;
-	padding-top: 6rem;
-	padding-bottom: 6rem;
+	background-image: url(map-image.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	padding-bottom: 10rem;
 }
 
 .box {
@@ -228,20 +227,19 @@ svg {
 }
 
 .titulo h4 {
-	margin: 5px;
 	font-size: 2.5rem;
-    margin-bottom: 1rem;
+	margin-bottom: 1rem;
 	color: white;
 	font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-weight: 700;
+	font-weight: 700;
 }
 
 .titulo h3 {
 	font-size: 1rem;
-    font-weight: 400;
-    font-style: italic;
-    font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    margin-bottom: 4rem;
+	font-weight: 400;
+	font-style: italic;
+	font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	margin-bottom: 4rem;
 	color: #6c757d;
 }
 
@@ -251,20 +249,22 @@ svg {
 	flex-direction: column;
 }
 
-.form {
-	width: 749px;
-	height: 200px;
-	display: grid;
-	grid-template-columns: 2fr 2fr;
-	grid-column-gap: 25px;
-	grid-row-gap: 25px;
-	
-}
+@media only screen and (min-width: 992px) {
+	.form {
+		width: 749px;
+		height: 200px;
+		display: grid;
+		grid-template-columns: 2fr 2fr;
+		grid-column-gap: 25px;
+		grid-row-gap: 25px;
+		
+	}
 
-#msg {
-	grid-column-start: 2;
-	grid-row-start: 1;
-	grid-row-end: 4;
+	#msg {
+		grid-column-start: 2;
+		grid-row-start: 1;
+		grid-row-end: 4;
+	}
 }
 
 @media only screen and (max-width: 600px) {
