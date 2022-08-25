@@ -27,7 +27,7 @@ body {
 	align-items: center;
 }
 
-@media handheld {
+@media only screen and (orientation: landscape) {
 	#title {
 		font-size: 24pt;
 	}
@@ -95,7 +95,7 @@ body {
 	}
 }
 
-@media handheld {
+@media only screen and (orientation: landscape) {
 	.servicosprop {
 		display: flex;
 		flex-direction: column;
@@ -155,7 +155,7 @@ svg {
 	grid-template-columns: repeat(3, auto);	
 }
 
-@media handheld {
+@media only screen and (orientation: landscape) {
 	.portprops {
 		display: grid;
 		grid-template-columns: repeat(1, auto);
@@ -267,7 +267,7 @@ svg {
 	}
 }
 
-@media handheld {
+@media only screen and (orientation: landscape) {
 	.form {
 		display: flex;
 		flex-direction: column;
