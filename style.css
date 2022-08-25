@@ -27,7 +27,7 @@ body {
 	align-items: center;
 }
 
-@media only screen and (max-width: 600px) {
+@media only Handheld {
 	#title {
 		font-size: 24pt;
 	}
@@ -95,7 +95,7 @@ body {
 	}
 }
 
-@media only screen and (max-width: 600px) {
+@media only Handheld {
 	.servicosprop {
 		display: flex;
 		flex-direction: column;
@@ -155,7 +155,7 @@ svg {
 	grid-template-columns: repeat(3, auto);	
 }
 
-@media only screen and (max-width: 600px) {
+@media only Handheld {
 	.portprops {
 		display: grid;
 		grid-template-columns: repeat(1, auto);
@@ -267,7 +267,7 @@ svg {
 	}
 }
 
-@media only screen and (max-width: 600px) {
+@media only Handheld {
 	.form {
 		display: flex;
 		flex-direction: column;
