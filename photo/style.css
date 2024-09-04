@@ -1,0 +1,149 @@
+body {
+    background-color: rgb(21, 21, 21);
+    font-size: 18px;
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
+  }
+
+  .navbar {
+    background-color: #107b29;
+    color: white;
+    padding: 0.5rem 0;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .navbar a {
+    color: inherit;
+    display: block;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .navbar a img {
+    height: 1.2rem;
+  }
+
+  .navbar a img.preview {
+    height: 2rem;
+    border: 1px solid #f5c012;
+  }
+
+  .navbar .container {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .container input {
+    font-size: 1rem;
+    border-radius: 0.4rem;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    border: 1px solid grey;
+  }
+
+  .container button {
+    font-size: 1rem;
+    border-radius: 0.4rem;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    border-width: 0;
+    border-bottom: 2px solid rgb(9, 99, 37);
+    background-color: #107b29;
+    color: white;
+    cursor: pointer;
+  }
+
+  .container canvas {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+  }
+
+  .container footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+    row-gap: 0.5rem;
+    color: #f5c012;
+  }
+
+  .container footer a {
+    color: #f5c012;
+    text-decoration: none;
+    column-gap: 0.25rem;
+  }
+
+  .container footer a {
+    display: flex;
+    align-items: center;
+  }
+
+  .container footer a img {
+    height: 1.5rem;
+  }
+
+  .container footer a img.profile {
+    border-radius: 50%;
+  }
+
+  .container smartphone {
+    display: block;
+    color: #1da60e;
+    margin: 2rem 0;
+  }
+
+  .container smartphone input {
+    height: 1.75rem;
+    margin: 0;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+    font-size: 1rem;
+    border: 1px solid #f5c012;
+    background-color: transparent;
+    color: #f5c012;
+    outline: none;
+    margin-left: 0.5rem;
+  }
+
+  .container smartphone b {
+    color: #f5c012;
+  }
+
+  .container smartphone .copy {
+    height: 1.5rem;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+  }
+
+  .container smartphone a {
+    color: #f5c012;
+    text-decoration: underline;
+    text-underline-offset: 0.5rem;
+    font-weight: bold;
+  }
+
+  .container smartphone a:hover {
+    color: #b08b10;
+    text-decoration: underline;
+    text-underline-offset: 0.5rem;
+  }
+
+  .container smartphone .nubank {
+    height: 1.5rem;
+  }

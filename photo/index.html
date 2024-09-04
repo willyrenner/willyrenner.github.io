@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <title>3° Ciclismo Sabugiense</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XG904CQWTP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-XG904CQWTP");
+  </script>
+  <script src="../js/clipboardtext.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <p style="color: white;">Escolha sua imagem e clique em salvar!</p>
+    <input type="file" />
+
+    <button>Salvar Imagem</button>
+
+    <canvas width="351" height="624"></canvas>
+
+    <footer>
+      Desenvolvido por:
+
+      <a href="https://www.instagram.com/willy_renner/" target="_blank">
+        <img src="../img/instagram-logo.svg" />
+        <span><b>Renner</b>Dev</span>
+      </a>
+
+    </footer>
+  </div>
+
+  <script>
+    const canvas = document.querySelector("canvas");
+    const context = canvas.getContext("2d");
+
+    const baseImage = new Image();
+    baseImage.crossOrigin = "anonymous";
+    baseImage.src = "./base.png";
+
+    document.querySelector("button").addEventListener("click", () => {
+      gtag("event", "download");
+      const a = document.createElement("a");
+      a.setAttribute("href", canvas.toDataURL("image/png"));
+      a.setAttribute("download", "image");
+      a.click();
+    });
+
+    baseImage.addEventListener("load", () => {
+      function draw() {
+        context.drawImage(baseImage, 0, 0, 351, 624);
+
+        document
+          .querySelector('input[type="file"]')
+          .addEventListener("change", (event) => {
+            var file = event.srcElement.files[0];
+            var reader = new FileReader();
+
+            reader.addEventListener(
+              "load",
+              function () {
+                const photo = new Image();
+                photo.src = reader.result;
+                photo.addEventListener("load", () => {
+                  let scaleFactor = Math.max(
+                    351 / photo.width,
+                    624 / photo.height
+                  );
+                  let newWidth = photo.width * scaleFactor;
+                  let newHeight = photo.height * scaleFactor;
+
+                  context.drawImage(
+                    photo,
+                    (351 - newWidth) / 2,
+                    (624 - newHeight) / 2,
+                    newWidth,
+                    newHeight
+                  );
+                  draw();
+                });
+              },
+              false
+            );
+
+            if (file) {
+              reader.readAsDataURL(file);
+            }
+          });
+      }
+
+      draw();
+
+      const image = new Image();
+      image.addEventListener("load", () => {
+        context.drawImage(image, 0, 0, 351, 624);
+        draw();
+      });
+    });
+  </script>
+</body>
+
+</html>
