@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nota de Serviço - França Segurança Eletrônica</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+  <script>
+    window.jsPDF = window.jspdf.jsPDF;
+  </script>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 1rem;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 5px;
+      text-align: left;
+    }
+    .right {
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Nota de Serviço - França Segurança Eletrônica</h2>
+
+    <label for="tecnico">Nome do Técnico:</label>
+    <input type="text" id="tecnico" />
+
+    <label for="cliente">Nome do Cliente:</label>
+    <input type="text" id="cliente" />
+
+    <label for="item">Item:</label>
+    <input type="text" id="item" />
+
+    <label for="quantidade">Quantidade:</label>
+    <input type="number" id="quantidade" min="1" value="1" />
+
+    <label for="tipo">Tipo:</label>
+    <select id="tipo">
+      <option value="unidade">Unidade</option>
+      <option value="metros">Metros</option>
+    </select>
+
+    <label for="valor">Valor unitário (R$):</label>
+    <input type="number" id="valor" step="0.01" />
+
+    <button onclick="adicionarItem()">Adicionar Item</button>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quant.</th>
+          <th>Tipo</th>
+          <th>Valor (R$)</th>
+          <th>Total (R$)</th>
+        </tr>
+      </thead>
+      <tbody id="tabela-itens"></tbody>
+    </table>
+
+    <h3 class="right">Total Geral: R$ <span id="total-geral">0.00</span></h3>
+
+    <button onclick="gerarPDF()">Gerar PDF</button>
+  </div>
+
+  <script>
+    const itens = [];
+
+    function adicionarItem() {
+      const item = document.getElementById('item').value;
+      const quantidade = parseFloat(document.getElementById('quantidade').value);
+      const tipo = document.getElementById('tipo').value;
+      const valor = parseFloat(document.getElementById('valor').value);
+
+      if (!item || isNaN(quantidade) || isNaN(valor)) {
+        alert('Preencha todos os campos corretamente.');
+        return;
+      }
+
+      const total = quantidade * valor;
+      itens.push({ item, quantidade, tipo, valor, total });
+      atualizarTabela();
+
+      document.getElementById('item').value = '';
+      document.getElementById('quantidade').value = 1;
+      document.getElementById('valor').value = '';
+    }
+
+    function atualizarTabela() {
+      const tbody = document.getElementById('tabela-itens');
+      tbody.innerHTML = '';
+      let totalGeral = 0;
+
+      itens.forEach(({ item, quantidade, tipo, valor, total }) => {
+        totalGeral += total;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item}</td>
+          <td>${quantidade}</td>
+          <td>${tipo}</td>
+          <td>R$ ${valor.toFixed(2)}</td>
+          <td>R$ ${total.toFixed(2)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('total-geral').innerText = totalGeral.toFixed(2);
+    }
+
+    function gerarPDF() {
+      const doc = new jsPDF();
+      const tecnico = document.getElementById('tecnico').value || 'Não informado';
+      const cliente = document.getElementById('cliente').value || 'Não informado';
+      const dataHora = new Date().toLocaleString();
+
+      doc.setFontSize(14);
+      doc.text('França Segurança Eletrônica', 105, 15, { align: 'center' });
+      doc.setFontSize(10);
+      doc.text(`Técnico: ${tecnico}`, 10, 20);
+      doc.text(`Cliente: ${cliente}`, 10, 25);
+      doc.text(`Data/Hora: ${dataHora}`, 10, 30);
+
+      const rows = itens.map(({ item, quantidade, tipo, valor, total }) => [
+        item,
+        quantidade.toString(),
+        tipo,
+        `R$ ${valor.toFixed(2)}`,
+        `R$ ${total.toFixed(2)}`
+      ]);
+
+      doc.autoTable({
+        startY: 40,
+        head: [['Item', 'Quant.', 'Tipo', 'Valor (R$)', 'Total (R$)']],
+        body: rows,
+        theme: 'grid',
+        headStyles: { fillColor: [22, 160, 133] },
+        styles: { fontSize: 10 }
+      });
+
+      const finalY = doc.lastAutoTable.finalY || 50;
+      const totalGeral = itens.reduce((sum, i) => sum + i.total, 0);
+
+      doc.setFontSize(14);
+      doc.setFont(undefined, 'bold');
+      doc.text(`Total Geral: R$ ${totalGeral.toFixed(2)}`, 10, finalY + 10);
+
+      doc.save(`nota-servico-${cliente.replace(/\s+/g, '-')}.pdf`);
+    }
+  </script>
+</body>
+</html>
